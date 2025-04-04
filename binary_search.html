@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search Visualizer</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Barriecito&display=swap" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assests/style.css">
+</head>
+<style>
+    #input_nums{
+        border-left-style: none;
+    }
+    #random_arr_button{
+        border-left-style: none;
+        
+        }
+    #target_num{
+    border-right-style: none;
+    border-left-style: none;
+    height: 40px;
+    width:100px;
+    padding: 15px 15px;
+    margin:0;
+    border-radius: 0;
+    }
+    #search_button{
+        border-left-style: none;
+        margin:0;
+        height: 40px;
+        padding: 5px 5px;
+        border-radius: 5px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        cursor: pointer;
+    }
+    .array-container {
+        display: flex;
+        align-items:center;
+        text-align: center;
+        overflow: auto;
+        margin: auto;
+    }
+    .array-element {
+        padding: 10px 20px;
+        margin: 5px;
+        background-color: #FF8364;
+        color: black;
+        border-radius: 5px;
+        font-weight: bold;
+        opacity: 1;
+        
+    }
+    .element_found {
+        background-color: #5F6CAF;
+        font-size: 40px;
+        color: white;
+        transform: scale(1.2);
+    }
+    .highlight {
+        background-color: greenyellow;
+        transform: scale(1.2);
+    }
+    .low {
+        background-color: lightcoral;
+    }
+    .high {
+        background-color: orchid;
+    }
+    .hidden {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+    .info-container {
+        margin-top: 20px;
+        padding: 0 20px 20px;
+    }
+</style>
+<body>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <a href="index.html">
+            <img class="logo" src="assests/logo.jpg" alt="logo">
+        </a>
+        <button class="navbar-toggler" style="background-color: white;" type="button" 
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" 
+                aria-controls="offcanvasRight">
+            <img src="assests/menu.png">
+        </button>
+    </div>    
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Explore More Algorithms!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body" id="inside_sidebar_section">
+            <ul id="algolist">
+                <li><a href="quick_sort.html"><strong><b>Quick sort</b></strong></a></li>
+                <li><a href="bubble_sort.html">Bubble Sort</a></li>
+                <li><a href="merge_sort.html">Merge Sort</a></li>
+                <li><a href="selection_sort.html">Selection Sort</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="heading">
+            <b>Binary Search Visualizer</b>
+        </div>
+        <div class="visual" id="visual">
+            <div class="" style="width: 100%;height: 350px;box-sizing: border-box;padding: 10px;">
+                <span class="text-center" style="display: block; font-size: 20px; font-weight: 500;" id="span_in_binary_search"></span>
+                <div class="array-container" id="arrayContainer" style="height: 150px;box-sizing: border-box;"></div>
+                <div id="info" class="info-container">
+                </div>
+                <div id="message" class="text-center">
+                </div>
+              </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="inputs">
+            <div class="speed">
+                <b>speed</b>
+                <input type="range" class="form_range" min="1" max="30" id="algo-speed">
+            </div>
+            <input id="input_nums" type="text" placeholder="Enter Numbers Separated With Commas (,)">
+            <button id="random_arr_button" style="background-color: rgb(251, 230, 5);"><b>Random Array</b></button>
+            <input id="target_num" type="number" placeholder="Target">
+            <button id="search_button" style="background-color: rgb(47, 255, 71);"><b>search</b></button>
+        </div>
+
+        <!-- Algorithm Explanation -->
+        <div class="algo-content">
+            <h1>Binary Search Algorithm</h1>
+            <br>
+            <hr>
+            <br>
+            <h2>Introduction</h2>
+            <p>Binary Search is an efficient searching algorithm that divides a sorted array into halves to locate a target element.</p>
+            <br>
+            <hr>
+            <br>
+            <h2>Time and Space Complexity</h2>
+            <ul>
+                <li>Best Case: O(1)</li>
+                <li>Average Case: O(log<sub>2</sub>n)</li>
+                <li>Worst Case: O(log<sub>2</sub>n)</li>
+                <li>Space Complexity: O(1)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Placed at the bottom for faster page load) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="algos/binary_search.js"></script>
+
+</body>
+</html>
