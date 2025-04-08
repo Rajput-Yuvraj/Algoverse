@@ -4,12 +4,8 @@ const mongoose = require('mongoose');
 const connectDB = require('./config/db');
 const User = require('./models/User');
 const path = require('path');
-const cors = require('cors');
 
 const app = express();
-
-// Enable CORS for deployment
-app.use(cors());
 
 // Update MongoDB connection for production
 connectDB();
@@ -183,11 +179,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-
-
-
-
-
-
-
-
